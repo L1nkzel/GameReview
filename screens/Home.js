@@ -18,6 +18,7 @@ const Home = () => {
   const [textInput, setTextInput] = useState("");
   const [games, setGames] = useState([]);
   const [isFetched, setIsFetched] = useState(false);
+  const navigation = useNavigation();
   const URL = "http://10.0.2.2:3000";
 
   const handleClick = () => {
@@ -31,16 +32,11 @@ const Home = () => {
     setTextInput(text);
   };
 
-  // useEffect(() => {
-  //   getApi()  }, []);
-
   const getApi = () => {
     fetch(`${URL}/${textInput}`)
-    .then(res => res.json())
-    .then(body => setGames(body))
+      .then((res) => res.json())
+      .then((body) => setGames(body));
   };
-
-  const navigation = useNavigation();
 
   function renderItems({ item: game }) {
     function pressHandler() {
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    marginTop: 50,
+    paddingTop: 30
   },
   textInputContainer: {
     flexDirection: "row",
