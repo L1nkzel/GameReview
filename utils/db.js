@@ -11,8 +11,7 @@ export const initDB = () => {
                     id INTEGER PRIMARY KEY NOT NULL,
                     title TEXT NOT NULL,
                     releaseDate TEXT NOT NULL,
-                    metaCritic INTEGER,
-                    genres TEXT,
+                    metaCritic TEXT,
                     backgroundImage TEXT NOT NULL,
                     review TEXT NOT NULL
                 )`,
@@ -41,12 +40,11 @@ export const insert = (game) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO gameReview (title, releaseDate, metaCritic, genres, backgroundImage, review) VALUES (?,?)`,
+        `INSERT INTO gameReview (title, releaseDate, metaCritic, backgroundImage, review) VALUES (?,?,?,?,?)`,
         [
           game.title,
           game.releaseDate,
-          game.metaCritic,
-          game.genres,
+          game.metacritic,
           game.backgroundImage,
           game.review,
         ],
@@ -72,7 +70,6 @@ export const findAll = () => {
                   row.title,
                   row.releaseDate,
                   row.metaCritic,
-                  row.genres,
                   row.backgroundImage,
                   row.review
                 )
@@ -96,3 +93,16 @@ export const deleteById = (id) => {
     });
   });
 };
+
+export const dropTable = () => {
+    return new Promise((resolve, reject) => {
+      db.transaction((transaction) => {
+        transaction.executeSql(
+          `DROP TABLE gameReview`,
+          [],
+          (_, res) => resolve(res),
+          (_, err) => reject(err)
+        );
+      });
+    });
+  };

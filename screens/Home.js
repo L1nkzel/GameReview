@@ -43,6 +43,7 @@ const Home = () => {
       navigation.navigate("GameScreen", {
         game,
       });
+      setGames([])
     }
 
     return (
@@ -88,7 +89,7 @@ export function GameImage(props, { id }) {
     <View style={styles.gameContainer}>
       {props.isFetched ? (
         <Image
-          style={{ width: 300, height: 300 }}
+          style={{ width: 200, height: 200 }}
           source={{ uri: games?.id.background_image }}
         />
       ) : null}

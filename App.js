@@ -7,16 +7,41 @@ import Home from './screens/Home';
 import MyReviews from './screens/MyReviews';
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
+import { dropTable, getTableInfo, initDB } from './utils/db';
 export default function App() {
+
 
   const bottomNav = createMaterialBottomTabNavigator();
   const stack =createNativeStackNavigator();
 
+  const [dbInited, setDbInited] = useState(false)
+
+  useEffect(() => {
+    initDB()
+      .then(res => {
+        console.log(res)
+        return getTableInfo()
+        // return dropTable()
+      })
+      .then((res) => {
+        console.log(
+          res.rows._array.map((row) => `${row.cid} ${row.name} ${row.type}`)
+        );
+        setDbInited(true);
+      });
+  }, []);
+  
+  if (!dbInited)
+    return <View><Text>Hej</Text></View>
+
+  
+
   function StackNav() {
     return (
-      <stack.Navigator>
-        <stack.Screen name='ChooseGame' component={Home}/>
-        <stack.Screen name='GameScreen' component={GameScreen}/>
+      <stack.Navigator >
+        <stack.Screen  name='ChooseGame' component={Home}/>
+        <stack.Screen  name='GameScreen' component={GameScreen}/>
       </stack.Navigator>
     )
   }
@@ -24,7 +49,7 @@ export default function App() {
   return (
     <>
     <NavigationContainer>
-      <bottomNav.Navigator>
+      <bottomNav.Navigator >
         <bottomNav.Screen name='Home' component={StackNav} options={{
          tabBarIcon: ({color, size=20}) => (
           <Ionicons name='home' color={color} size={size}/>
