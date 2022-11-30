@@ -1,17 +1,12 @@
-import { Button, DeviceEventEmitter, Image, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { findAll, insert } from "../utils/db";
-import Review from "../models/Review";
+import { StyleSheet, View } from "react-native";
 import ReviewForm from "../components/form/ReviewForm";
 
-const GameScreen = ({ route, navigation }) => {
-
+const GameScreen = ({ route }) => {
   const game = route.params?.game;
-  
+
   return (
     <View style={styles.container}>
-    <ReviewForm game = {game}/>
-     
+      <ReviewForm game={game} />
     </View>
   );
 };
@@ -23,20 +18,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 30
+    paddingTop: 30,
   },
 });
 
-    // DeviceEventEmitter.addListener('deleteById', async (id) =>{
-    //   await deleteById(id);
-    //   const res = await findAll();
-    //   setReviewList(res);
-    // })
+// DeviceEventEmitter.addListener('deleteById', async (id) =>{
+//   await deleteById(id);
+//   const res = await findAll();
+//   setReviewList(res);
+// })
 
-          {/* <Text style={styles.text}>
+{
+  /* <Text style={styles.text}>
         Platforms: <Text style={styles.innerText}>{id.platforms.map(p => `${p.platform.name} | `)}</Text>
-        </Text> */}
+        </Text> */
+}
 
-      {/* <Text style={styles.text}>
+{
+  /* <Text style={styles.text}>
         Metacritic Score: <Text style={styles.innerText}>{id.metacritic}</Text>
-      </Text> */}
+      </Text> */
+}

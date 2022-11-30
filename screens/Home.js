@@ -1,23 +1,19 @@
 import {
-  Dimensions,
   FlatList,
   Image,
   Keyboard,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import GameCard from "../components/GameCard";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
   const [textInput, setTextInput] = useState("");
   const [games, setGames] = useState([]);
-  const [isFetched, setIsFetched] = useState(false);
   const navigation = useNavigation();
   const URL = "http://10.0.2.2:3000";
 
@@ -84,18 +80,6 @@ const Home = () => {
   );
 };
 
-export function GameImage(props, { id }) {
-  return (
-    <View style={styles.gameContainer}>
-      {props.isFetched ? (
-        <Image
-          style={{ width: 200, height: 200 }}
-          source={{ uri: games?.id.background_image }}
-        />
-      ) : null}
-    </View>
-  );
-}
 export default Home;
 
 const styles = StyleSheet.create({
@@ -122,16 +106,6 @@ const styles = StyleSheet.create({
     padding: 19,
     backgroundColor: "gold",
     borderRadius: 5,
-  },
-  gameContainer: {
-    padding: 4,
-    width: 300,
-    height: 300,
-    margin: 10,
-    borderRadius: 6,
-    borderWidth: 4,
-    borderColor: "black",
-    backgroundColor: "",
   },
   gameText: {
     marginVertical: 2,

@@ -9,11 +9,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { dropTable, getTableInfo, initDB } from './utils/db';
+import ReviewScreen from './screens/ReviewScreen';
+import Colors from './constants/Colors';
+import { LinearGradient } from 'expo-linear-gradient';
 export default function App() {
 
 
-  const bottomNav = createMaterialBottomTabNavigator();
-  const stack =createNativeStackNavigator();
+  const BottomNav = createMaterialBottomTabNavigator();
+  const Stack =createNativeStackNavigator();
 
   const [dbInited, setDbInited] = useState(false)
 
@@ -39,30 +42,46 @@ export default function App() {
 
   function StackNav() {
     return (
-      <stack.Navigator >
-        <stack.Screen  name='ChooseGame' component={Home}/>
-        <stack.Screen  name='GameScreen' component={GameScreen}/>
-      </stack.Navigator>
+      <Stack.Navigator 
+      screenOptions={{
+        headerTitleAlign:"center",
+        headerBackground: () => (
+          <LinearGradient 
+            colors={[Colors.primary500, Colors.accent500]}
+            style={{flex:1}}
+          />
+        )
+       }}>
+        <Stack.Screen  name='HomeScreen' component={Home}
+         options={{headerTitle:"Find A Game"}}
+        />
+        <Stack.Screen  name='GameScreen' component={GameScreen}
+           options={{headerTitle:"Write A Review"}}
+        />
+        <Stack.Screen  name='ReviewScreen' component={ReviewScreen}
+           options={{headerTitle:"Game Review"}}
+        />
+      </Stack.Navigator>
     )
   }
 
   return (
     <>
     <NavigationContainer>
-      <bottomNav.Navigator >
-        <bottomNav.Screen name='Home' component={StackNav} options={{
+      <BottomNav.Navigator barStyle={{backgroundColor:Colors.primary600}}>
+        <BottomNav.Screen name='Home' component={StackNav} options={{
          tabBarIcon: ({color, size=20}) => (
           <Ionicons name='home' color={color} size={size}/>
          )
         }}/>
-        <bottomNav.Screen name='MyReviews' component={MyReviews} options={{
+        <BottomNav.Screen name='MyReviews' component={MyReviews} options={{
          tabBarIcon: ({color, size=20}) => (
           <Ionicons name='star' color={color} size={size}/>
          )
         }}/>
-      </bottomNav.Navigator>
+      </BottomNav.Navigator>
     </NavigationContainer>
-      <StatusBar />
+      <StatusBar/>
     </>
   );
 }

@@ -10,7 +10,7 @@ const ReviewInputForm = ({ style, inputCfg }) => {
 
   return (
     <View style={styles.inputContainer}>
-      <TextInput 
+      <TextInput
       style={[inputStyles, style]}
       {...inputCfg}
       />
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffffa2",
     padding: 10,
     marginTop: 10,
-    width: "70%",
+    width: 300,
     borderRadius: 10,
   },
 

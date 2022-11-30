@@ -19,7 +19,8 @@
     "express": "^4.18.2",
     "react": "18.1.0",
     "react-native": "0.70.5",
-    "react-native-screen": "^1.0.1"
+    "react-native-screen": "^1.0.1",
+    "expo-linear-gradient": "~12.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
