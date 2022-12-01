@@ -1,6 +1,8 @@
 import {
+  Dimensions,
   FlatList,
   Image,
+  ImageBackground,
   Keyboard,
   Pressable,
   StyleSheet,
@@ -10,6 +12,8 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import Colors from "../constants/Colors";
 
 const Home = () => {
   const [textInput, setTextInput] = useState("");
@@ -42,6 +46,13 @@ const Home = () => {
       setGames([])
     }
 
+    // useEffect(() => {
+    //   const jumpToHome = navigation.addListener("tabPress", (e) => {
+    //     navigation.navigate("HomeScreen")
+    //   })
+    //   return jumpToHome;
+    // }, [navigation])
+
     return (
       <Pressable onPress={pressHandler}>
         <Text style={styles.gameText}>{game.name}</Text>
@@ -50,6 +61,16 @@ const Home = () => {
   }
 
   return (
+    <LinearGradient 
+    colors={[Colors.primary700 ,"#FAEBD7" ]}
+    style={{flex:1}}
+    >
+    <ImageBackground
+    source={require("../assets/nesRetro1.jpg")}
+    resizeMode="cover"
+    style={styles.imageBackground}
+    imageStyle={{opacity:0.55}}
+    >
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
         <TextInput
@@ -65,7 +86,7 @@ const Home = () => {
           ]}
           onPress={handleClick}
         >
-          <Text>Search</Text>
+          <Text style={{ color:"white", fontWeight:"bold"}}>Search</Text>
         </Pressable>
       </View>
 
@@ -77,6 +98,8 @@ const Home = () => {
         />
       </View>
     </View>
+    </ImageBackground>
+    </LinearGradient>
   );
 };
 
@@ -84,8 +107,8 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
+
+   // backgroundColor: "#fff",
     alignItems: "center",
     paddingTop: 30
   },
@@ -98,19 +121,24 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 15,
     borderRadius: 5,
-    borderColor: "#FFD54F",
+    borderColor: Colors.primary500,
     borderWidth: 5,
     width: "60%",
   },
   addButton: {
     padding: 19,
-    backgroundColor: "gold",
+    backgroundColor: Colors.primary500,
     borderRadius: 5,
   },
   gameText: {
     marginVertical: 2,
     borderWidth: 1,
     padding: 8,
-    backgroundColor: "gold",
+    fontWeight:"bold",
+    backgroundColor: Colors.primary200,
+  },
+  imageBackground: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
   },
 });

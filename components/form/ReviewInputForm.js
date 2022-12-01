@@ -28,8 +28,7 @@ const styles = StyleSheet.create({
 
   input: {
     backgroundColor: "#ffffffa2",
-    padding: 10,
-    marginTop: 10,
+    padding: 8,
     width: 300,
     borderRadius: 10,
   },

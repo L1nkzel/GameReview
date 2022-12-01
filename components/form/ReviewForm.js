@@ -17,10 +17,14 @@ import Title from "../ui/Title";
 
 const ReviewForm = ({ game }) => {
   const [reviewInput, setReviewInput] = useState("");
+  const [titleReview, setTitleReview] = useState("");
   const nav = useNavigation();
 
-  const handleChangeText = (text) => {
+  const handleChangeReview = (text) => {
     setReviewInput(text);
+  };
+  const handleChangeTitleReview = (text) => {
+    setTitleReview(text);
   };
 
   console.log(game);
@@ -32,11 +36,14 @@ const ReviewForm = ({ game }) => {
         undefined,
         game.name,
         game.released,
+        JSON.stringify(game.genres),
+        JSON.stringify(game.platforms),
         game.metacritic,
         game.background_image,
+        titleReview,
         reviewInput
       )
-    );
+    )
     const res = await findAll();
     console.log(res);
     DeviceEventEmitter.emit("addNewReview");
@@ -44,36 +51,45 @@ const ReviewForm = ({ game }) => {
     nav.navigate("MyReviews");
   };
 
-  function CheckRatings() {
-    if (game.metacritic !== null) {
-      return (
-        <Text style={styles.text}>
-          Rating: <Text style={styles.innerText}>{game.metacritic}</Text>
-        </Text>
-      );
-    }
-  }
+
 
   return (
     <View style={styles.container}>
-    <Title>{game.name}</Title>
-      {/* <Text style={styles.text}>
-        Title: <Text style={styles.innerText}>{game.name}</Text>
-      </Text> */}
+      <Title>{game.name}</Title>
       <Text style={styles.text}>
         Released: <Text style={styles.innerText}>{game.released}</Text>
       </Text>
 
-      <CheckRatings />
+      <Text style={styles.text}>
+        Genres:{" "}
+        <Text style={styles.innerText}>
+          {game.genres.map((p) => `${p.name}  `)}
+        </Text>
+      </Text>
+      {/* <Text style={styles.text}>
+        Platforms:{" "}
+        <Text style={styles.innerText}>
+          {game.platforms.map((p) => `${p.platform.name} | `)}
+        </Text>
+      </Text> */}
+
       <View style={styles.imageContainer}>
-      <Image style={styles.image} source={{ uri: game.background_image }} />
+        <Image style={styles.image} source={{ uri: game.background_image }} />
       </View>
       <ReviewInputForm
         style={styles.inputContainer}
         inputCfg={{
+          placeholder: "Enter a title for your review...",
+          value: titleReview,
+          onChangeText: handleChangeTitleReview,
+        }}
+      />
+      <ReviewInputForm
+        style={styles.inputContainer}
+        inputCfg={{
           value: reviewInput,
-          onChangeText: handleChangeText,
-          placeholder:"Write your review here...",
+          onChangeText: handleChangeReview,
+          placeholder: "Write your review here...",
           keyboardType: "default",
           multiline: true,
         }}
@@ -93,13 +109,13 @@ const styles = StyleSheet.create({
     elevation: 8,
     marginTop: 5,
   },
-  imageContainer:{
-    marginVertical:8
+  imageContainer: {
+    marginVertical: 8,
   },
   image: {
     width: 300,
     height: 150,
-    borderRadius:8
+    borderRadius: 8,
   },
   text: {
     fontSize: 16,
@@ -113,6 +129,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputContainer: {
-    borderWidth: 2
+    borderWidth: 2,
   },
 });

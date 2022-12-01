@@ -10,9 +10,12 @@ export const initDB = () => {
         `CREATE TABLE IF NOT EXISTS gameReview (
                     id INTEGER PRIMARY KEY NOT NULL,
                     title TEXT NOT NULL,
+                    genres TEXT,
+                    platforms TEXT, 
                     releaseDate TEXT NOT NULL,
                     metaCritic TEXT,
                     backgroundImage TEXT NOT NULL,
+                    titleReview TEXT NOT NULL,
                     review TEXT NOT NULL
                 )`,
         [],
@@ -40,12 +43,15 @@ export const insert = (game) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO gameReview (title, releaseDate, metaCritic, backgroundImage, review) VALUES (?,?,?,?,?)`,
+        `INSERT INTO gameReview (title, releaseDate, genres, platforms, metaCritic, backgroundImage, titleReview, review) VALUES (?,?,?,?,?,?,?,?)`,
         [
           game.title,
           game.releaseDate,
+          game.genres,
+          game.platforms,
           game.metacritic,
           game.backgroundImage,
+          game.titleReview,
           game.review,
         ],
         (_, res) => resolve(res),
@@ -69,8 +75,11 @@ export const findAll = () => {
                   row.id,
                   row.title,
                   row.releaseDate,
+                  row.genres,
+                  row.platforms,
                   row.metaCritic,
                   row.backgroundImage,
+                  row.titleReview,
                   row.review
                 )
             )

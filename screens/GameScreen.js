@@ -1,13 +1,15 @@
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import ReviewForm from "../components/form/ReviewForm";
 
 const GameScreen = ({ route }) => {
   const game = route.params?.game;
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <ReviewForm game={game} />
     </View>
+    </ScrollView>
   );
 };
 
@@ -22,20 +24,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// DeviceEventEmitter.addListener('deleteById', async (id) =>{
-//   await deleteById(id);
-//   const res = await findAll();
-//   setReviewList(res);
-// })
 
-{
-  /* <Text style={styles.text}>
-        Platforms: <Text style={styles.innerText}>{id.platforms.map(p => `${p.platform.name} | `)}</Text>
-        </Text> */
-}
 
-{
-  /* <Text style={styles.text}>
-        Metacritic Score: <Text style={styles.innerText}>{id.metacritic}</Text>
-      </Text> */
-}
+
