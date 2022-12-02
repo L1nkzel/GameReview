@@ -15,10 +15,9 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../constants/Colors";
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [textInput, setTextInput] = useState("");
   const [games, setGames] = useState([]);
-  const navigation = useNavigation();
   const URL = "http://10.0.2.2:3000";
 
   const handleClick = () => {
@@ -43,15 +42,8 @@ const Home = () => {
       navigation.navigate("GameScreen", {
         game,
       });
-      setGames([])
+      setGames([]);
     }
-
-    // useEffect(() => {
-    //   const jumpToHome = navigation.addListener("tabPress", (e) => {
-    //     navigation.navigate("HomeScreen")
-    //   })
-    //   return jumpToHome;
-    // }, [navigation])
 
     return (
       <Pressable onPress={pressHandler}>
@@ -61,44 +53,41 @@ const Home = () => {
   }
 
   return (
-    <LinearGradient 
-    colors={[Colors.primary700 ,"#FAEBD7" ]}
-    style={{flex:1}}
-    >
-    <ImageBackground
-    source={require("../assets/nesRetro1.jpg")}
-    resizeMode="cover"
-    style={styles.imageBackground}
-    imageStyle={{opacity:0.55}}
-    >
-    <View style={styles.container}>
-      <View style={styles.textInputContainer}>
-        <TextInput
-          placeholder="Find Game"
-          style={styles.textInput}
-          value={textInput}
-          onChangeText={handleChangeText}
-        />
-        <Pressable
-          style={({ pressed }) => [
-            styles.addButton,
-            { opacity: pressed ? 0.3 : 1 },
-          ]}
-          onPress={handleClick}
-        >
-          <Text style={{ color:"white", fontWeight:"bold"}}>Search</Text>
-        </Pressable>
-      </View>
+    <LinearGradient colors={[Colors.primary700, "#FAEBD7"]} style={{ flex: 1 }}>
+      <ImageBackground
+        source={require("../assets/nesRetro1.jpg")}
+        resizeMode="cover"
+        style={styles.imageBackground}
+        imageStyle={{ opacity: 0.55 }}
+      >
+        <View style={styles.container}>
+          <View style={styles.textInputContainer}>
+            <TextInput
+              placeholder="Find Game"
+              style={styles.textInput}
+              value={textInput}
+              onChangeText={handleChangeText}
+            />
+            <Pressable
+              style={({ pressed }) => [
+                styles.addButton,
+                { opacity: pressed ? 0.3 : 1 },
+              ]}
+              onPress={handleClick}
+            >
+              <Text style={{ color: "white", fontWeight: "bold" }}>Search</Text>
+            </Pressable>
+          </View>
 
-      <View style={{ margin: 10, height: 300, width: 320 }}>
-        <FlatList
-          contentContainerStyle={{ margin: 5 }}
-          data={games.results}
-          renderItem={renderItems}
-        />
-      </View>
-    </View>
-    </ImageBackground>
+          <View style={{ margin: 10, height: 300, width: 320 }}>
+            <FlatList
+              contentContainerStyle={{ margin: 5 }}
+              data={games.results}
+              renderItem={renderItems}
+            />
+          </View>
+        </View>
+      </ImageBackground>
     </LinearGradient>
   );
 };
@@ -107,10 +96,9 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-
-   // backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 30
+    paddingTop: 30,
   },
   textInputContainer: {
     flexDirection: "row",
@@ -134,7 +122,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     borderWidth: 1,
     padding: 8,
-    fontWeight:"bold",
+    fontWeight: "bold",
     backgroundColor: Colors.primary200,
   },
   imageBackground: {

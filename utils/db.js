@@ -104,14 +104,14 @@ export const deleteById = (id) => {
 };
 
 export const dropTable = () => {
-    return new Promise((resolve, reject) => {
-      db.transaction((transaction) => {
-        transaction.executeSql(
-          `DROP TABLE gameReview`,
-          [],
-          (_, res) => resolve(res),
-          (_, err) => reject(err)
-        );
-      });
+  return new Promise((resolve, reject) => {
+    db.transaction((transaction) => {
+      transaction.executeSql(
+        `DROP TABLE gameReview`,
+        [],
+        (_, res) => resolve(res),
+        (_, err) => reject(err)
+      );
     });
-  };
+  });
+};

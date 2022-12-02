@@ -1,7 +1,6 @@
 import {
   DeviceEventEmitter,
   Image,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -27,7 +26,7 @@ const ReviewScreen = ({ route, navigation }) => {
 
   const handleDelete = () => {
     DeviceEventEmitter.emit("removeReviewById", id);
-    navigation.navigate("HomeScreen");
+    navigation.navigate("HomeScreen"); // Needed for the app to navigate back properly to homeScreen when deleteing a review and pressing the home button in bottom navigation.
     navigation.navigate("MyReviews");
   };
 
@@ -41,7 +40,7 @@ const ReviewScreen = ({ route, navigation }) => {
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text style={styles.text}>Genres: </Text>
-          {JSON.parse(genres).map((p) => (
+          {JSON.parse(genres).map((p) => ( 
             <Text key={p.name} style={{ marginHorizontal: 2 }}>
               {p.name}
             </Text>

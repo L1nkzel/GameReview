@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReviewInputForm from "./ReviewInputForm";
 import Review from "../../models/Review";
 import { useNavigation } from "@react-navigation/native";
@@ -36,22 +36,20 @@ const ReviewForm = ({ game }) => {
         undefined,
         game.name,
         game.released,
-        JSON.stringify(game.genres),
-        JSON.stringify(game.platforms),
+        JSON.stringify(game.genres), //using JSON.stringify so that we can send an array of genres in SQLite database. Using JSON.parse later in the ReviewScreen.js so we can retrive the data from the database.
+        JSON.stringify(game.platforms), // Same as above.
         game.metacritic,
         game.background_image,
         titleReview,
         reviewInput
       )
-    )
+    );
     const res = await findAll();
     console.log(res);
     DeviceEventEmitter.emit("addNewReview");
-    nav.navigate("HomeScreen");
+    nav.navigate("HomeScreen"); // Needed for the app to navigate back properly when pressing on the home button after you submit a review.
     nav.navigate("MyReviews");
   };
-
-
 
   return (
     <View style={styles.container}>
@@ -66,12 +64,6 @@ const ReviewForm = ({ game }) => {
           {game.genres.map((p) => `${p.name}  `)}
         </Text>
       </Text>
-      {/* <Text style={styles.text}>
-        Platforms:{" "}
-        <Text style={styles.innerText}>
-          {game.platforms.map((p) => `${p.platform.name} | `)}
-        </Text>
-      </Text> */}
 
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: game.background_image }} />

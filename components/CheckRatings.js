@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const CheckRatings = ({metacritic}) => {
+const CheckRatings = ({ metacritic }) => {
   if (metacritic !== null && metacritic >= 80) {
     return (
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -31,30 +31,30 @@ const CheckRatings = ({metacritic}) => {
 export default CheckRatings;
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 16,
-        fontWeight: "bold",
-        margin: 2,
-      },
-      innerText: {
-        fontWeight: "400",
-      },
-    ratingGreen: {
-        backgroundColor:"green",
-        color:"white",
-        padding: 6,
-        borderRadius:15
-      },
-      ratingYellow: {
-        backgroundColor:"gold",
-        color:"white",
-        padding: 6,
-        borderRadius:15
-      },
-      ratingRed: {
-        backgroundColor:"red",
-        color:"white",
-        padding: 6,
-        borderRadius:15
-      },
+  text: {
+    fontSize: 16,
+    fontWeight: "bold",
+    margin: 2,
+  },
+  innerText: {
+    fontWeight: "400",
+  },
+  ratingGreen: {
+    backgroundColor: "green",
+    color: "white",
+    padding: 6,
+    borderRadius: 15,
+  },
+  ratingYellow: {
+    backgroundColor: "gold",
+    color: "white",
+    padding: 6,
+    borderRadius: 15,
+  },
+  ratingRed: {
+    backgroundColor: "red",
+    color: "white",
+    padding: 6,
+    borderRadius: 15,
+  },
 });

@@ -6,9 +6,9 @@ const GameScreen = ({ route }) => {
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <ReviewForm game={game} />
-    </View>
+      <View style={styles.container}>
+        <ReviewForm game={game} />
+      </View>
     </ScrollView>
   );
 };
@@ -23,7 +23,3 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
 });
-
-
-
-

@@ -6,7 +6,6 @@ import {
   ImageBackground,
   Pressable,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -43,29 +42,31 @@ const MyReviews = () => {
       });
     }
 
-
-  
-
-
     return (
       <Pressable onPress={pressHandler}>
         <View style={styles.container}>
           <LinearGradient
             colors={[Colors.primary300, "#44a38d"]}
-            style={{ flex: 1, borderRadius: 8, paddingHorizontal: 16, alignItems:"center" }}
+            style={{
+              flex: 1,
+              borderRadius: 8,
+              paddingHorizontal: 16,
+              alignItems: "center",
+            }}
           >
-            <Title style={{color:"white"}}>{game?.title}</Title>
+            <Title style={{ color: "white" }}>{game?.title}</Title>
             <Image
               style={{ width: 300, height: 150, borderRadius: 8 }}
               source={{ uri: game?.backgroundImage }}
             />
-            <Title style={{ fontSize: 18, color:"gold" }}>{game.titleReview}</Title>
+            <Title style={{ fontSize: 18, color: "gold" }}>
+              {game.titleReview}
+            </Title>
           </LinearGradient>
         </View>
       </Pressable>
     );
   }
-  
 
   return (
     <ImageBackground
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  imageStyle:{
+  imageStyle: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-  }
+  },
 });

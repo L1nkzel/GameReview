@@ -1,7 +1,7 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import GameScreen from "./screens/GameScreen";
 import Home from "./screens/Home";
 import MyReviews from "./screens/MyReviews";
@@ -12,6 +12,7 @@ import { dropTable, getTableInfo, initDB } from "./utils/db";
 import ReviewScreen from "./screens/ReviewScreen";
 import Colors from "./constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
+
 export default function App() {
   const BottomNav = createMaterialBottomTabNavigator();
   const Stack = createNativeStackNavigator();
@@ -35,8 +36,8 @@ export default function App() {
 
   if (!dbInited)
     return (
-      <View>
-        <Text>Hej</Text>
+      <View style={{alignItems:"center", justifyContent: "center"}}>
+        <Text>Could not init database</Text>
       </View>
     );
 
@@ -86,9 +87,9 @@ export default function App() {
             }}
           />
           <BottomNav.Screen
-            listeners={({ navigation}) => ({
+            listeners={({ navigation }) => ({
               tabPress: () => {
-                navigation.navigate("HomeScreen")
+                navigation.navigate("HomeScreen");
               },
             })}
             name="MyReviews"
@@ -105,12 +106,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
